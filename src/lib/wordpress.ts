@@ -28,20 +28,6 @@ const client = new GraphQLClient(endpoint);
    Shared Fragments
    ============================================ */
 
-const SEO_FRAGMENT = gql`
-  fragment SeoFields on PostTypeSEO {
-    title
-    metaDesc
-    opengraphTitle
-    opengraphDescription
-    opengraphImage {
-      sourceUrl
-      altText
-    }
-    canonical
-  }
-`;
-
 const FEATURED_IMAGE_FRAGMENT = gql`
   fragment FeaturedImageFields on NodeWithFeaturedImageToMediaItemConnectionEdge {
     node {
@@ -64,7 +50,6 @@ export async function getPosts(
   after?: string
 ): Promise<{ posts: WPPost[]; hasNextPage: boolean; endCursor: string }> {
   const query = gql`
-    ${SEO_FRAGMENT}
     ${FEATURED_IMAGE_FRAGMENT}
     query GetPosts($first: Int!, $after: String) {
       posts(first: $first, after: $after, where: { status: PUBLISH }) {
@@ -100,9 +85,6 @@ export async function getPosts(
               }
             }
           }
-          seo {
-            ...SeoFields
-          }
         }
         pageInfo {
           hasNextPage
@@ -124,7 +106,6 @@ export async function getPostBySlug(
   slug: string
 ): Promise<WPPost | null> {
   const query = gql`
-    ${SEO_FRAGMENT}
     ${FEATURED_IMAGE_FRAGMENT}
     query GetPost($slug: ID!) {
       post(id: $slug, idType: SLUG) {
@@ -160,9 +141,6 @@ export async function getPostBySlug(
             }
           }
         }
-        seo {
-          ...SeoFields
-        }
       }
     }
   `;
@@ -194,7 +172,6 @@ export async function getPageBySlug(
   slug: string
 ): Promise<WPPage | null> {
   const query = gql`
-    ${SEO_FRAGMENT}
     ${FEATURED_IMAGE_FRAGMENT}
     query GetPage($slug: ID!) {
       page(id: $slug, idType: URI) {
@@ -208,9 +185,6 @@ export async function getPageBySlug(
         featuredImage {
           ...FeaturedImageFields
         }
-        seo {
-          ...SeoFields
-        }
       }
     }
   `;
@@ -221,7 +195,6 @@ export async function getPageBySlug(
 
 export async function getAllPages(): Promise<WPPage[]> {
   const query = gql`
-    ${SEO_FRAGMENT}
     query GetAllPages {
       pages(first: 100, where: { status: PUBLISH }) {
         nodes {
@@ -232,9 +205,6 @@ export async function getAllPages(): Promise<WPPage[]> {
           content
           date
           modified
-          seo {
-            ...SeoFields
-          }
         }
       }
     }
@@ -250,7 +220,6 @@ export async function getAllPages(): Promise<WPPage[]> {
 
 export async function getServices(): Promise<WPService[]> {
   const query = gql`
-    ${SEO_FRAGMENT}
     ${FEATURED_IMAGE_FRAGMENT}
     query GetServices {
       services(first: 100, where: { status: PUBLISH }) {
@@ -270,9 +239,6 @@ export async function getServices(): Promise<WPService[]> {
             ctaText
             ctaLink
           }
-          seo {
-            ...SeoFields
-          }
         }
       }
     }
@@ -288,7 +254,6 @@ export async function getServiceBySlug(
   slug: string
 ): Promise<WPService | null> {
   const query = gql`
-    ${SEO_FRAGMENT}
     ${FEATURED_IMAGE_FRAGMENT}
     query GetService($slug: ID!) {
       service(id: $slug, idType: SLUG) {
@@ -307,9 +272,6 @@ export async function getServiceBySlug(
           ctaText
           ctaLink
         }
-        seo {
-          ...SeoFields
-        }
       }
     }
   `;
@@ -324,7 +286,6 @@ export async function getServiceBySlug(
 
 export async function getCaseStudies(): Promise<WPCaseStudy[]> {
   const query = gql`
-    ${SEO_FRAGMENT}
     ${FEATURED_IMAGE_FRAGMENT}
     query GetCaseStudies {
       caseStudies(first: 100, where: { status: PUBLISH }) {
@@ -350,9 +311,6 @@ export async function getCaseStudies(): Promise<WPCaseStudy[]> {
             testimonialAuthor
             testimonialRole
           }
-          seo {
-            ...SeoFields
-          }
         }
       }
     }
@@ -368,7 +326,6 @@ export async function getCaseStudyBySlug(
   slug: string
 ): Promise<WPCaseStudy | null> {
   const query = gql`
-    ${SEO_FRAGMENT}
     ${FEATURED_IMAGE_FRAGMENT}
     query GetCaseStudy($slug: ID!) {
       caseStudy(id: $slug, idType: SLUG) {
@@ -392,9 +349,6 @@ export async function getCaseStudyBySlug(
           testimonialQuote
           testimonialAuthor
           testimonialRole
-        }
-        seo {
-          ...SeoFields
         }
       }
     }
