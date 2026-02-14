@@ -4,4 +4,4 @@ Allow: /
 # Block WordPress admin
 Disallow: /wp-admin/
 
-Sitemap: https://wolfpackadvising.com/sitemap-index.xml
+Sitemap: https://wolfpackagency.co/sitemap-index.xml
