@@ -18,24 +18,45 @@ try {
   title="Blog | WolfPack Advising"
   description="Insights, strategies, and stories from the WolfPack Advising team."
 >
-  <section class="py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-[var(--color-brand-dark)] mb-2">Blog</h1>
-      <p class="text-gray-600 mb-12 max-w-2xl">
-        Insights and strategies to help your business grow.
-      </p>
+  <!-- Hero Section -->
+  <section class="relative hero-mesh text-white py-24 lg:py-36 overflow-hidden">
+    <div class="absolute inset-0 decorative-grid"></div>
+    <div class="absolute bottom-0 left-[20%] w-72 h-72 bg-[var(--color-brand-secondary)]/10 rounded-full blur-3xl animate-float" data-parallax="0.2"></div>
 
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl animate-slide-up">
+        <span class="inline-block text-sm font-semibold text-[var(--color-brand-accent-light)] uppercase tracking-wider mb-4">Our Blog</span>
+        <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+          Insights & <span class="text-gradient-light">Strategies</span>
+        </h1>
+        <p class="text-lg text-blue-100/70 max-w-lg">
+          Actionable insights and strategies to help your business grow, from the WolfPack Advising team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Grid -->
+  <section class="py-24 lg:py-32 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {allPosts.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
           {allPosts.map((post) => (
-            <PostCard post={post} />
+            <div class="animate-on-scroll">
+              <PostCard post={post} />
+            </div>
           ))}
         </div>
       ) : (
-        <div class="text-center py-16 text-gray-500">
-          <p class="text-lg">No posts yet. Check back soon!</p>
-          <p class="text-sm mt-2">
-            Posts will appear here once WordPress is connected and content is published.
+        <div class="text-center py-24 animate-on-scroll">
+          <div class="w-20 h-20 rounded-2xl bg-[var(--color-brand-primary)]/10 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-[var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-2">No posts yet</h3>
+          <p class="text-gray-500 max-w-md mx-auto">
+            Posts will appear here once WordPress is connected and content is published. Check back soon!
           </p>
         </div>
       )}

@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 /* ============================================
-   WolfPack Advising - Design Tokens
+   WolfPack Advising - Modern Design System
    ============================================ */
 
 @theme {
-  /* Brand Colors - customize these to match WolfPack branding */
+  /* Brand Colors */
   --color-brand-primary: #1e3a5f;
   --color-brand-secondary: #2d6a4f;
   --color-brand-accent: #e07c24;
   --color-brand-dark: #0d1b2a;
   --color-brand-light: #f0f4f8;
 
-  /* Typography Scale */
+  /* Extended Palette */
+  --color-brand-primary-light: #2a4f7f;
+  --color-brand-accent-light: #f4a261;
+
+  /* Typography */
   --font-family-heading: "Inter", system-ui, sans-serif;
   --font-family-body: "Inter", system-ui, sans-serif;
 }
@@ -29,21 +33,232 @@ body {
   font-family: var(--font-family-body);
   color: var(--color-gray-800);
   line-height: 1.7;
+  overflow-x: hidden;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-heading);
   font-weight: 700;
   line-height: 1.2;
   color: var(--color-brand-dark);
 }
 
-/* WordPress content block styling */
+/* ============================================
+   Scroll-triggered Animations
+   ============================================ */
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.slide-left {
+  transform: translateX(-60px);
+}
+
+.animate-on-scroll.slide-left.is-visible {
+  transform: translateX(0);
+}
+
+.animate-on-scroll.slide-right {
+  transform: translateX(60px);
+}
+
+.animate-on-scroll.slide-right.is-visible {
+  transform: translateX(0);
+}
+
+.animate-on-scroll.scale-in {
+  transform: scale(0.9);
+}
+
+.animate-on-scroll.scale-in.is-visible {
+  transform: scale(1);
+}
+
+/* Stagger delays for grid children */
+.stagger-children > .animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+.stagger-children > .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children > .animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
+.stagger-children > .animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
+.stagger-children > .animate-on-scroll:nth-child(5) { transition-delay: 0.4s; }
+.stagger-children > .animate-on-scroll:nth-child(6) { transition-delay: 0.5s; }
+.stagger-children > .animate-on-scroll:nth-child(7) { transition-delay: 0.6s; }
+.stagger-children > .animate-on-scroll:nth-child(8) { transition-delay: 0.7s; }
+.stagger-children > .animate-on-scroll:nth-child(9) { transition-delay: 0.8s; }
+
+/* ============================================
+   Keyframe Animations
+   ============================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-gradient { background-size: 200% 200%; animation: gradient-shift 8s ease infinite; }
+.animate-slide-up { animation: slide-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fade-in { animation: fade-in 1s ease forwards; }
+
+/* ============================================
+   Glassmorphism
+   ============================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(13, 27, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ============================================
+   Modern Card Styles
+   ============================================ */
+
+.card-modern {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.card-modern:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+}
+
+.card-glass:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  border-color: rgba(224, 124, 36, 0.3);
+}
+
+/* ============================================
+   Image Hover Zoom
+   ============================================ */
+
+.img-zoom { overflow: hidden; }
+.img-zoom img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.img-zoom:hover img { transform: scale(1.05); }
+
+/* ============================================
+   Gradient Text
+   ============================================ */
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-light {
+  background: linear-gradient(135deg, #ffffff, var(--color-brand-accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Decorative Backgrounds
+   ============================================ */
+
+.decorative-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.decorative-dots {
+  background-image: radial-gradient(circle, rgba(30,58,95,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================
+   Hero Mesh Gradient
+   ============================================ */
+
+.hero-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(30,58,95,0.9) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(45,106,79,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(224,124,36,0.15) 0%, transparent 50%),
+    linear-gradient(180deg, var(--color-brand-dark) 0%, var(--color-brand-primary) 100%);
+}
+
+/* ============================================
+   Accent Line
+   ============================================ */
+
+.accent-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-brand-accent), var(--color-brand-accent-light));
+  border-radius: 2px;
+}
+
+/* ============================================
+   Counter
+   ============================================ */
+
+.counter-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   WordPress Content Block Styling
+   ============================================ */
+
 .wp-content h2 {
   font-size: 1.875rem;
   margin-top: 2rem;
@@ -56,9 +271,7 @@ h6 {
   margin-bottom: 0.75rem;
 }
 
-.wp-content p {
-  margin-bottom: 1.25rem;
-}
+.wp-content p { margin-bottom: 1.25rem; }
 
 .wp-content ul,
 .wp-content ol {
@@ -66,31 +279,21 @@ h6 {
   padding-left: 1.5rem;
 }
 
-.wp-content ul {
-  list-style-type: disc;
-}
-
-.wp-content ol {
-  list-style-type: decimal;
-}
-
-.wp-content li {
-  margin-bottom: 0.5rem;
-}
+.wp-content ul { list-style-type: disc; }
+.wp-content ol { list-style-type: decimal; }
+.wp-content li { margin-bottom: 0.5rem; }
 
 .wp-content a {
   color: var(--color-brand-primary);
   text-decoration: underline;
 }
 
-.wp-content a:hover {
-  color: var(--color-brand-accent);
-}
+.wp-content a:hover { color: var(--color-brand-accent); }
 
 .wp-content img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   margin: 1.5rem 0;
 }
 

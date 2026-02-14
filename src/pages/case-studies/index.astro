@@ -16,50 +16,66 @@ try {
   title="Case Studies | WolfPack Advising"
   description="See how we've helped businesses achieve real results."
 >
-  <section class="py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-[var(--color-brand-dark)] mb-2">Case Studies</h1>
-      <p class="text-gray-600 mb-12 max-w-2xl">
-        Real results from real partnerships. See how we've helped businesses like yours.
-      </p>
+  <!-- Hero Section -->
+  <section class="relative hero-mesh text-white py-24 lg:py-36 overflow-hidden">
+    <div class="absolute inset-0 decorative-grid"></div>
+    <div class="absolute top-1/3 left-[5%] w-80 h-80 bg-[var(--color-brand-accent)]/10 rounded-full blur-3xl animate-float" data-parallax="0.25"></div>
 
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl animate-slide-up">
+        <span class="inline-block text-sm font-semibold text-[var(--color-brand-accent-light)] uppercase tracking-wider mb-4">Case Studies</span>
+        <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+          Proven <span class="text-gradient-light">Results</span>
+        </h1>
+        <p class="text-lg text-blue-100/70 max-w-lg">
+          Real results from real partnerships. See how we've helped businesses like yours achieve extraordinary outcomes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies Grid -->
+  <section class="py-24 lg:py-32 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {caseStudies.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 stagger-children">
           {caseStudies.map((study) => {
             const fields = study.caseStudyFields;
             const imageUrl = study.featuredImage?.node?.sourceUrl;
             return (
-              <article class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+              <article class="card-modern group animate-on-scroll">
                 {imageUrl && (
-                  <img
-                    src={imageUrl}
-                    alt={study.featuredImage?.node?.altText || study.title}
-                    class="w-full h-48 object-cover"
-                    loading="lazy"
-                  />
+                  <div class="img-zoom">
+                    <img
+                      src={imageUrl}
+                      alt={study.featuredImage?.node?.altText || study.title}
+                      class="w-full h-56 object-cover"
+                      loading="lazy"
+                    />
+                  </div>
                 )}
                 <div class="p-8">
                   {fields?.clientName && (
-                    <span class="text-xs font-semibold uppercase tracking-wide text-[var(--color-brand-accent)]">
+                    <span class="inline-block text-xs font-semibold uppercase tracking-wider text-[var(--color-brand-accent)] mb-3">
                       {fields.clientName}
                     </span>
                   )}
-                  <h3 class="text-xl font-bold mt-2 mb-3">
-                    <a
-                      href={`/case-studies/${study.slug}`}
-                      class="hover:text-[var(--color-brand-primary)] transition-colors"
-                    >
+                  <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3 group-hover:text-[var(--color-brand-primary)] transition-colors">
+                    <a href={`/case-studies/${study.slug}`}>
                       {study.title}
                     </a>
                   </h3>
                   {fields?.challenge && (
-                    <p class="text-gray-600 text-sm line-clamp-3">{fields.challenge}</p>
+                    <p class="text-gray-500 text-sm leading-relaxed line-clamp-3 mb-6">{fields.challenge}</p>
                   )}
                   <a
                     href={`/case-studies/${study.slug}`}
-                    class="inline-block mt-4 text-sm font-semibold text-[var(--color-brand-accent)] hover:text-[var(--color-brand-primary)] transition-colors"
+                    class="inline-flex items-center text-sm font-semibold text-[var(--color-brand-accent)] hover:text-[var(--color-brand-primary)] transition-colors group/link"
                   >
-                    Read Case Study &rarr;
+                    Read Case Study
+                    <svg class="ml-1 w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </a>
                 </div>
               </article>
@@ -67,13 +83,44 @@ try {
           })}
         </div>
       ) : (
-        <div class="text-center py-16 text-gray-500">
-          <p class="text-lg">Case studies coming soon.</p>
-          <p class="text-sm mt-2">
+        <div class="text-center py-24 animate-on-scroll">
+          <div class="w-20 h-20 rounded-2xl bg-[var(--color-brand-accent)]/10 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-[var(--color-brand-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-2">Case studies coming soon</h3>
+          <p class="text-gray-500 max-w-md mx-auto">
             Case studies will appear here once the custom post type is configured in WordPress.
           </p>
         </div>
       )}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 lg:py-32 overflow-hidden">
+    <div class="absolute inset-0 hero-mesh"></div>
+    <div class="absolute inset-0 decorative-grid"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="animate-on-scroll scale-in">
+        <h2 class="text-3xl lg:text-5xl font-extrabold text-white mb-6">
+          Your Success Story<br />Starts Here
+        </h2>
+        <p class="text-blue-100/70 text-lg mb-10 max-w-xl mx-auto">
+          Join the growing list of businesses that have transformed their operations with WolfPack Advising.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-10 py-4 text-base font-semibold text-white bg-gradient-to-r from-[var(--color-brand-accent)] to-[var(--color-brand-accent-light)] rounded-xl hover:shadow-xl hover:shadow-[var(--color-brand-accent)]/25 transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Start Your Journey
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -9,11 +9,27 @@ interface Props {
 const { quote, author, role, clientName } = Astro.props;
 ---
 
-<blockquote class="bg-white rounded-lg shadow-sm p-8 border-l-4 border-[var(--color-brand-accent)]">
-  <p class="text-gray-700 italic text-lg leading-relaxed mb-4">"{quote}"</p>
-  <footer class="text-sm">
-    <span class="font-semibold text-[var(--color-brand-dark)]">{author}</span>
-    {role && <span class="text-gray-500"> &mdash; {role}</span>}
-    {clientName && <span class="text-gray-500">, {clientName}</span>}
+<blockquote class="card-glass p-8 relative">
+  <!-- Quote mark -->
+  <div class="absolute top-6 right-6 text-[var(--color-brand-accent)]/15">
+    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
+    </svg>
+  </div>
+
+  <div class="accent-line mb-6"></div>
+  <p class="text-gray-600 italic text-lg leading-relaxed mb-6 relative">"{quote}"</p>
+  <footer class="flex items-center gap-3">
+    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-brand-primary)] to-[var(--color-brand-accent)] flex items-center justify-center">
+      <span class="text-white font-bold text-sm">{author.charAt(0)}</span>
+    </div>
+    <div>
+      <span class="block font-semibold text-[var(--color-brand-dark)] text-sm">{author}</span>
+      {(role || clientName) && (
+        <span class="text-xs text-gray-400">
+          {role}{role && clientName && ", "}{clientName}
+        </span>
+      )}
+    </div>
   </footer>
 </blockquote>

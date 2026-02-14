@@ -9,24 +9,39 @@ const { service } = Astro.props;
 const fields = service.serviceFields;
 ---
 
-<div class="bg-white rounded-lg shadow-sm p-8 hover:shadow-md transition-shadow">
+<div class="card-glass p-8 group h-full flex flex-col">
   {fields?.serviceIcon && (
-    <div class="text-4xl mb-4">{fields.serviceIcon}</div>
+    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-brand-primary)] to-[var(--color-brand-primary-light)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+      <span class="text-2xl text-white">{fields.serviceIcon}</span>
+    </div>
   )}
-  <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">
-    <a href={`/services/${service.slug}`} class="hover:text-[var(--color-brand-primary)] transition-colors">
+  <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3 group-hover:text-[var(--color-brand-primary)] transition-colors">
+    <a href={`/services/${service.slug}`}>
       {service.title}
     </a>
   </h3>
   {fields?.serviceDescription && (
-    <p class="text-gray-600 mb-4">{fields.serviceDescription}</p>
+    <p class="text-gray-500 leading-relaxed mb-6 flex-1">{fields.serviceDescription}</p>
   )}
-  {fields?.ctaText && (
+  {fields?.ctaText ? (
     <a
       href={fields.ctaLink || `/services/${service.slug}`}
-      class="inline-block text-sm font-semibold text-[var(--color-brand-accent)] hover:text-[var(--color-brand-primary)] transition-colors"
+      class="inline-flex items-center text-sm font-semibold text-[var(--color-brand-accent)] hover:text-[var(--color-brand-primary)] transition-colors group/link"
     >
-      {fields.ctaText} &rarr;
+      {fields.ctaText}
+      <svg class="ml-1 w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </a>
+  ) : (
+    <a
+      href={`/services/${service.slug}`}
+      class="inline-flex items-center text-sm font-semibold text-[var(--color-brand-accent)] hover:text-[var(--color-brand-primary)] transition-colors group/link"
+    >
+      Learn More
+      <svg class="ml-1 w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
     </a>
   )}
 </div>

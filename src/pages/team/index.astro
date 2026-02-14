@@ -8,7 +8,6 @@ let members: WPTeamMember[] = [];
 
 try {
   members = await getTeamMembers();
-  // Sort by the ACF "order" field if available
   members.sort((a, b) => (a.teamMemberFields?.order ?? 99) - (b.teamMemberFields?.order ?? 99));
 } catch {
   // WordPress unavailable
@@ -19,27 +18,118 @@ try {
   title="Our Team | WolfPack Advising"
   description="Meet the team behind WolfPack Advising."
 >
-  <section class="py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-[var(--color-brand-dark)] mb-2">Our Team</h1>
-      <p class="text-gray-600 mb-12 max-w-2xl">
-        Meet the people who make WolfPack Advising work.
-      </p>
+  <!-- Hero Section -->
+  <section class="relative hero-mesh text-white py-24 lg:py-36 overflow-hidden">
+    <div class="absolute inset-0 decorative-grid"></div>
+    <div class="absolute top-1/2 right-[10%] w-96 h-96 bg-[var(--color-brand-secondary)]/10 rounded-full blur-3xl animate-float" data-parallax="0.2"></div>
 
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl animate-slide-up">
+        <span class="inline-block text-sm font-semibold text-[var(--color-brand-accent-light)] uppercase tracking-wider mb-4">Our Team</span>
+        <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+          Meet the <span class="text-gradient-light">Pack</span>
+        </h1>
+        <p class="text-lg text-blue-100/70 max-w-lg">
+          A team of experienced strategists, operators, and advisors dedicated to your success.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Grid -->
+  <section class="py-24 lg:py-32 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {members.length > 0 ? (
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
           {members.map((member) => (
-            <TeamMemberCard member={member} />
+            <div class="animate-on-scroll">
+              <TeamMemberCard member={member} />
+            </div>
           ))}
         </div>
       ) : (
-        <div class="text-center py-16 text-gray-500">
-          <p class="text-lg">Team page coming soon.</p>
-          <p class="text-sm mt-2">
+        <div class="text-center py-24 animate-on-scroll">
+          <div class="w-20 h-20 rounded-2xl bg-[var(--color-brand-primary)]/10 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-[var(--color-brand-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-2">Team page coming soon</h3>
+          <p class="text-gray-500 max-w-md mx-auto">
             Team members will appear here once the custom post type is configured in WordPress.
           </p>
         </div>
       )}
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <div class="absolute bottom-0 right-0 w-80 h-80 bg-[var(--color-brand-accent)]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" data-parallax="0.1"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate-on-scroll">
+        <span class="inline-block text-sm font-semibold text-[var(--color-brand-accent)] uppercase tracking-wider mb-4">Our Values</span>
+        <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--color-brand-dark)] mb-4">
+          What <span class="text-gradient">Drives Us</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children">
+        <div class="card-glass p-8 text-center animate-on-scroll">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-brand-primary)] to-[var(--color-brand-primary-light)] flex items-center justify-center mx-auto mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-[var(--color-brand-dark)] mb-3">Integrity First</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">We tell you what you need to hear, not what you want to hear. Honest advice drives real results.</p>
+        </div>
+        <div class="card-glass p-8 text-center animate-on-scroll">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-brand-secondary)] to-emerald-400 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-[var(--color-brand-dark)] mb-3">Bias Toward Action</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Strategy without execution is just a dream. We move fast, measure often, and adjust as needed.</p>
+        </div>
+        <div class="card-glass p-8 text-center animate-on-scroll">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-brand-accent)] to-[var(--color-brand-accent-light)] flex items-center justify-center mx-auto mb-6">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-[var(--color-brand-dark)] mb-3">Client Obsessed</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Your success is our success. We treat every engagement as a true partnership.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 lg:py-32 overflow-hidden">
+    <div class="absolute inset-0 hero-mesh"></div>
+    <div class="absolute inset-0 decorative-grid"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="animate-on-scroll scale-in">
+        <h2 class="text-3xl lg:text-5xl font-extrabold text-white mb-6">
+          Want to Join<br />the Pack?
+        </h2>
+        <p class="text-blue-100/70 text-lg mb-10 max-w-xl mx-auto">
+          We're always looking for talented people who share our passion for helping businesses grow.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-10 py-4 text-base font-semibold text-white bg-gradient-to-r from-[var(--color-brand-accent)] to-[var(--color-brand-accent-light)] rounded-xl hover:shadow-xl hover:shadow-[var(--color-brand-accent)]/25 transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Get in Touch
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

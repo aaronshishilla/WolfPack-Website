@@ -17,27 +17,180 @@ try {
   title="Services | WolfPack Advising"
   description="Explore our consulting and advisory services designed to accelerate your business growth."
 >
-  <section class="py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-[var(--color-brand-dark)] mb-2">Our Services</h1>
-      <p class="text-gray-600 mb-12 max-w-2xl">
-        We offer a range of consulting services tailored to your business needs.
-      </p>
+  <!-- Hero Section -->
+  <section class="relative hero-mesh text-white py-24 lg:py-36 overflow-hidden">
+    <div class="absolute inset-0 decorative-grid"></div>
+    <div class="absolute top-1/2 right-[5%] w-80 h-80 bg-[var(--color-brand-accent)]/10 rounded-full blur-3xl animate-float" data-parallax="0.2"></div>
 
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl animate-slide-up">
+        <span class="inline-block text-sm font-semibold text-[var(--color-brand-accent-light)] uppercase tracking-wider mb-4">Our Services</span>
+        <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+          Solutions That <span class="text-gradient-light">Drive Growth</span>
+        </h1>
+        <p class="text-lg text-blue-100/70 max-w-lg">
+          We offer a range of consulting services tailored to your business needs, from strategy development to operational execution.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-24 lg:py-32 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {services.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
           {services.map((service) => (
-            <ServiceCard service={service} />
+            <div class="animate-on-scroll">
+              <ServiceCard service={service} />
+            </div>
           ))}
         </div>
       ) : (
-        <div class="text-center py-16 text-gray-500">
-          <p class="text-lg">Services coming soon.</p>
-          <p class="text-sm mt-2">
-            Service pages will appear here once the Services custom post type is configured in WordPress.
-          </p>
-        </div>
+        <>
+          <!-- Static service cards when WordPress is unavailable -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+            <div class="card-glass p-8 animate-on-scroll">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-brand-primary)] to-[var(--color-brand-primary-light)] flex items-center justify-center mb-6">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">Strategy Consulting</h3>
+              <p class="text-gray-500 leading-relaxed mb-6">Data-driven strategies to accelerate growth, refine market position, and unlock new revenue streams.</p>
+              <div class="accent-line"></div>
+            </div>
+
+            <div class="card-glass p-8 animate-on-scroll">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-brand-secondary)] to-emerald-400 flex items-center justify-center mb-6">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">Growth Advisory</h3>
+              <p class="text-gray-500 leading-relaxed mb-6">Hands-on guidance to scale operations, expand your market reach, and accelerate sustainable revenue growth.</p>
+              <div class="accent-line"></div>
+            </div>
+
+            <div class="card-glass p-8 animate-on-scroll">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-brand-accent)] to-[var(--color-brand-accent-light)] flex items-center justify-center mb-6">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">Operational Excellence</h3>
+              <p class="text-gray-500 leading-relaxed mb-6">Optimize processes, build resilient systems, and create sustainable frameworks that work at scale.</p>
+              <div class="accent-line"></div>
+            </div>
+
+            <div class="card-glass p-8 animate-on-scroll">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-purple-400 flex items-center justify-center mb-6">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">Leadership Development</h3>
+              <p class="text-gray-500 leading-relaxed mb-6">Build high-performing leadership teams with executive coaching and talent development programs.</p>
+              <div class="accent-line"></div>
+            </div>
+
+            <div class="card-glass p-8 animate-on-scroll">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-600 to-sky-400 flex items-center justify-center mb-6">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">Digital Transformation</h3>
+              <p class="text-gray-500 leading-relaxed mb-6">Leverage technology to modernize operations, enhance customer experience, and drive innovation.</p>
+              <div class="accent-line"></div>
+            </div>
+
+            <div class="card-glass p-8 animate-on-scroll">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-400 flex items-center justify-center mb-6">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">Financial Advisory</h3>
+              <p class="text-gray-500 leading-relaxed mb-6">Strategic financial planning, fundraising support, and performance optimization for sustainable growth.</p>
+              <div class="accent-line"></div>
+            </div>
+          </div>
+        </>
       )}
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-[var(--color-brand-primary)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" data-parallax="0.1"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 animate-on-scroll">
+        <span class="inline-block text-sm font-semibold text-[var(--color-brand-accent)] uppercase tracking-wider mb-4">Our Process</span>
+        <h2 class="text-3xl lg:text-5xl font-extrabold text-[var(--color-brand-dark)] mb-4">
+          How We <span class="text-gradient">Work</span>
+        </h2>
+        <p class="text-gray-500 max-w-2xl mx-auto text-lg">A proven framework that delivers results.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 stagger-children">
+        <div class="text-center animate-on-scroll">
+          <div class="w-16 h-16 rounded-2xl bg-[var(--color-brand-primary)]/10 flex items-center justify-center mx-auto mb-6">
+            <span class="text-2xl font-extrabold text-[var(--color-brand-primary)]">01</span>
+          </div>
+          <h3 class="text-lg font-bold text-[var(--color-brand-dark)] mb-2">Discover</h3>
+          <p class="text-gray-500 text-sm">Deep-dive into your business, challenges, and opportunities.</p>
+        </div>
+        <div class="text-center animate-on-scroll">
+          <div class="w-16 h-16 rounded-2xl bg-[var(--color-brand-secondary)]/10 flex items-center justify-center mx-auto mb-6">
+            <span class="text-2xl font-extrabold text-[var(--color-brand-secondary)]">02</span>
+          </div>
+          <h3 class="text-lg font-bold text-[var(--color-brand-dark)] mb-2">Strategize</h3>
+          <p class="text-gray-500 text-sm">Develop a tailored roadmap with clear milestones.</p>
+        </div>
+        <div class="text-center animate-on-scroll">
+          <div class="w-16 h-16 rounded-2xl bg-[var(--color-brand-accent)]/10 flex items-center justify-center mx-auto mb-6">
+            <span class="text-2xl font-extrabold text-[var(--color-brand-accent)]">03</span>
+          </div>
+          <h3 class="text-lg font-bold text-[var(--color-brand-dark)] mb-2">Execute</h3>
+          <p class="text-gray-500 text-sm">Implement changes with hands-on support and guidance.</p>
+        </div>
+        <div class="text-center animate-on-scroll">
+          <div class="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mx-auto mb-6">
+            <span class="text-2xl font-extrabold text-purple-500">04</span>
+          </div>
+          <h3 class="text-lg font-bold text-[var(--color-brand-dark)] mb-2">Measure</h3>
+          <p class="text-gray-500 text-sm">Track results and optimize for continuous improvement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 lg:py-32 overflow-hidden">
+    <div class="absolute inset-0 hero-mesh"></div>
+    <div class="absolute inset-0 decorative-grid"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="animate-on-scroll scale-in">
+        <h2 class="text-3xl lg:text-5xl font-extrabold text-white mb-6">
+          Let's Find the Right<br />Solution for You
+        </h2>
+        <p class="text-blue-100/70 text-lg mb-10 max-w-xl mx-auto">
+          Every business is different. Let's discuss your unique challenges and craft a strategy together.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-10 py-4 text-base font-semibold text-white bg-gradient-to-r from-[var(--color-brand-accent)] to-[var(--color-brand-accent-light)] rounded-xl hover:shadow-xl hover:shadow-[var(--color-brand-accent)]/25 transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Start a Conversation
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
