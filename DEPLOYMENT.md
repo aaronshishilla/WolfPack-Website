@@ -19,15 +19,15 @@ In the Cloudflare Pages project settings, add these environment variables:
 
 | Variable | Production Value | Preview Value |
 |---|---|---|
-| `PUBLIC_WORDPRESS_URL` | `https://admin.wolfpackadvising.com` | `https://admin.wolfpackadvising.com` |
-| `PUBLIC_GRAPHQL_ENDPOINT` | `https://admin.wolfpackadvising.com/graphql` | `https://admin.wolfpackadvising.com/graphql` |
-| `PUBLIC_SITE_URL` | `https://wolfpackadvising.com` | (auto-set by Cloudflare) |
+| `PUBLIC_WORDPRESS_URL` | `https://admin.wolfpackagency.co` | `https://admin.wolfpackagency.co` |
+| `PUBLIC_GRAPHQL_ENDPOINT` | `https://admin.wolfpackagency.co/graphql` | `https://admin.wolfpackagency.co/graphql` |
+| `PUBLIC_SITE_URL` | `https://wolfpackagency.co` | (auto-set by Cloudflare) |
 | `NODE_VERSION` | `20` | `20` |
 
 ### 3. Custom Domain
 
 1. In your Cloudflare Pages project, go to **Custom domains**
-2. Add `wolfpackadvising.com` and `www.wolfpackadvising.com`
+2. Add `wolfpackagency.co` and `www.wolfpackagency.co`
 3. Cloudflare handles SSL automatically
 
 ---
@@ -86,8 +86,8 @@ In the Cloudflare Pages dashboard, click **Retry deployment** on the latest depl
 
 | Environment | WordPress | Frontend |
 |---|---|---|
-| **Staging** | `admin.wolfpackadvising.com` | Cloudflare preview deploy (auto-generated URL) |
-| **Production** | `admin.wolfpackadvising.com` | `wolfpackadvising.com` |
+| **Staging** | `admin.wolfpackagency.co` | Cloudflare preview deploy (auto-generated URL) |
+| **Production** | `admin.wolfpackagency.co` | `wolfpackagency.co` |
 
 For a separate staging WordPress instance, create a second `.env` with different `PUBLIC_GRAPHQL_ENDPOINT` and set it in the Cloudflare preview environment variables.
 
@@ -106,7 +106,7 @@ Typical build: fetches all content from WordPress GraphQL, generates static HTML
 ## Troubleshooting
 
 ### Build fails with GraphQL error
-- Verify the WordPress GraphQL endpoint is accessible: `curl https://admin.wolfpackadvising.com/graphql`
+- Verify the WordPress GraphQL endpoint is accessible: `curl https://admin.wolfpackagency.co/graphql`
 - Check that WPGraphQL plugin is active
 - Ensure custom post types have "Show in GraphQL" enabled
 

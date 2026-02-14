@@ -7,7 +7,7 @@ A headless WordPress website for WolfPack Advising. WordPress handles content ma
 ```
 ┌──────────────────────┐     GraphQL      ┌──────────────────────┐
 │   WordPress (Kinsta) │ ◄──────────────► │   Astro (Cloudflare) │
-│ admin.wolfpack...com │    /graphql      │  wolfpackadvising.com │
+│ admin.wolfpack...com │    /graphql      │  wolfpackagency.co │
 │                      │                  │                      │
 │ - Content editing    │                  │ - Static pages (SSG) │
 │ - ACF custom fields  │                  │ - Server routes (SSR)│
@@ -74,9 +74,9 @@ Copy `.env.example` to `.env` and fill in values:
 
 | Variable | Description | Example |
 |---|---|---|
-| `PUBLIC_WORDPRESS_URL` | WordPress admin URL | `https://admin.wolfpackadvising.com` |
-| `PUBLIC_GRAPHQL_ENDPOINT` | WPGraphQL endpoint | `https://admin.wolfpackadvising.com/graphql` |
-| `PUBLIC_SITE_URL` | Public site URL | `https://wolfpackadvising.com` |
+| `PUBLIC_WORDPRESS_URL` | WordPress admin URL | `https://admin.wolfpackagency.co` |
+| `PUBLIC_GRAPHQL_ENDPOINT` | WPGraphQL endpoint | `https://admin.wolfpackagency.co/graphql` |
+| `PUBLIC_SITE_URL` | Public site URL | `https://wolfpackagency.co` |
 
 ## Content Types
 
@@ -114,7 +114,7 @@ See [WORDPRESS-SETUP.md](./WORDPRESS-SETUP.md) for the full guide on configuring
 
 ## Content Workflow
 
-1. **Edit content** in WordPress at `admin.wolfpackadvising.com/wp-admin`
+1. **Edit content** in WordPress at `admin.wolfpackagency.co/wp-admin`
 2. **Publish or update** the post/page
 3. **Trigger rebuild** — Cloudflare Pages rebuilds on git push, or set up a webhook for instant deploys (see DEPLOYMENT.md)
 4. **Changes go live** on the public site after the build completes

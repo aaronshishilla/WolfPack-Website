@@ -4,13 +4,13 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://wolfpackadvising.com",
+  site: "https://wolfpackagency.co",
   adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()],
   },
   integrations: [sitemap()],
   image: {
-    domains: ["admin.wolfpackadvising.com"],
+    domains: ["admin.wolfpackagency.co"],
   },
 });

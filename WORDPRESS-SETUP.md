@@ -1,6 +1,6 @@
 # WordPress Setup Guide for Headless Architecture
 
-This guide walks through configuring the WordPress backend at `admin.wolfpackadvising.com` to work as a headless CMS with the Astro frontend.
+This guide walks through configuring the WordPress backend at `admin.wolfpackagency.co` to work as a headless CMS with the Astro frontend.
 
 ---
 
@@ -15,7 +15,7 @@ Install and activate these plugins from the WordPress admin dashboard:
 - Visit **GraphQL > Settings** and ensure:
   - "Enable GraphQL Endpoint" is checked
   - The endpoint path is `/graphql` (default)
-- Test it: visit `https://admin.wolfpackadvising.com/graphql` in a browser — you should see the GraphQL IDE
+- Test it: visit `https://admin.wolfpackagency.co/graphql` in a browser — you should see the GraphQL IDE
 
 ### WPGraphQL for ACF (Free)
 - Download from: https://github.com/wp-graphql/wpgraphql-acf
@@ -133,8 +133,8 @@ Add this to your theme's `functions.php` or a custom plugin:
  */
 add_action('init', function () {
     $allowed_origins = [
-        'https://wolfpackadvising.com',
-        'https://staging.wolfpackadvising.com',
+        'https://wolfpackagency.co',
+        'https://staging.wolfpackagency.co',
         'http://localhost:4321', // Astro dev server
     ];
 
@@ -168,7 +168,7 @@ add_action('init', function () {
 
 After installing WPGraphQL, visit:
 ```
-https://admin.wolfpackadvising.com/graphql
+https://admin.wolfpackagency.co/graphql
 ```
 
 Try this test query in the GraphQL IDE:

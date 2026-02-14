@@ -20,7 +20,7 @@ import type {
 
 const endpoint =
   import.meta.env.PUBLIC_GRAPHQL_ENDPOINT ||
-  "https://admin.wolfpackadvising.com/graphql";
+  "https://admin.wolfpackagency.co/graphql";
 
 const client = new GraphQLClient(endpoint);
 
@@ -492,7 +492,7 @@ export async function getMenu(
 export function stripWpDomain(url: string): string {
   const wpUrl =
     import.meta.env.PUBLIC_WORDPRESS_URL ||
-    "https://admin.wolfpackadvising.com";
+    "https://admin.wolfpackagency.co";
   return url.replace(wpUrl, "");
 }
 
