@@ -235,7 +235,9 @@ export async function getServices(): Promise<WPService[]> {
           serviceFields {
             serviceDescription
             serviceIcon
-            serviceBenefits
+            serviceBenefits {
+              benefit
+            }
             ctaText
             ctaLink
           }
@@ -268,7 +270,9 @@ export async function getServiceBySlug(
         serviceFields {
           serviceDescription
           serviceIcon
-          serviceBenefits
+          serviceBenefits {
+            benefit
+          }
           ctaText
           ctaLink
         }

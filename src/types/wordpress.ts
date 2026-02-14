@@ -89,7 +89,7 @@ export interface WPPage {
 export interface ACFServiceFields {
   serviceDescription: string;
   serviceIcon: string;
-  serviceBenefits: string[];
+  serviceBenefits: { benefit: string }[] | null;
   ctaText: string;
   ctaLink: string;
 }
