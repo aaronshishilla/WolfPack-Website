@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TeamMemberCard from "@/components/TeamMemberCard.astro";
+import { getTeamMembers } from "@/lib/wordpress";
+import type { WPTeamMember } from "@/types/wordpress";
+
+let members: WPTeamMember[] = [];
+
+try {
+  members = await getTeamMembers();
+  // Sort by the ACF "order" field if available
+  members.sort((a, b) => (a.teamMemberFields?.order ?? 99) - (b.teamMemberFields?.order ?? 99));
+} catch {
+  // WordPress unavailable
+}
+---
+
+<BaseLayout
+  title="Our Team | WolfPack Advising"
+  description="Meet the team behind WolfPack Advising."
+>
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-[var(--color-brand-dark)] mb-2">Our Team</h1>
+      <p class="text-gray-600 mb-12 max-w-2xl">
+        Meet the people who make WolfPack Advising work.
+      </p>
+
+      {members.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {members.map((member) => (
+            <TeamMemberCard member={member} />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16 text-gray-500">
+          <p class="text-lg">Team page coming soon.</p>
+          <p class="text-sm mt-2">
+            Team members will appear here once the custom post type is configured in WordPress.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

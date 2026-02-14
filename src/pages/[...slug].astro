@@ -1,0 +1,53 @@
+---
+/**
+ * Catch-all route for WordPress pages.
+ * This handles any page created in WordPress that doesn't have
+ * a dedicated template (like /about, /contact, /privacy, etc.)
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAllPages, getPageBySlug } from "@/lib/wordpress";
+
+export async function getStaticPaths() {
+  try {
+    const pages = await getAllPages();
+    // Exclude pages that have dedicated routes
+    const excludeSlugs = ["blog", "services", "case-studies", "team", "home"];
+    return pages
+      .filter((page) => !excludeSlugs.includes(page.slug))
+      .map((page) => ({
+        params: { slug: page.slug === "home" ? undefined : page.uri.replace(/^\/|\/$/g, "") },
+      }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+const page = await getPageBySlug(`/${slug || ""}`);
+
+if (!page) {
+  return Astro.redirect("/");
+}
+
+const imageUrl = page.featuredImage?.node?.sourceUrl;
+---
+
+<BaseLayout title={page.title} seo={page.seo}>
+  <article class="py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl lg:text-5xl font-bold text-[var(--color-brand-dark)] mb-8">
+        {page.title}
+      </h1>
+
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt={page.featuredImage?.node?.altText || page.title}
+          class="w-full rounded-lg mb-8"
+        />
+      )}
+
+      <div class="wp-content prose prose-lg max-w-none" set:html={page.content} />
+    </div>
+  </article>
+</BaseLayout>

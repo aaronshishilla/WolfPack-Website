@@ -1,0 +1,42 @@
+---
+import type { WPPost } from "@/types/wordpress";
+import { formatDate } from "@/lib/wordpress";
+
+interface Props {
+  post: WPPost;
+}
+
+const { post } = Astro.props;
+const imageUrl = post.featuredImage?.node?.sourceUrl;
+const category = post.categories?.nodes?.[0];
+---
+
+<article class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+  {imageUrl && (
+    <a href={`/blog/${post.slug}`}>
+      <img
+        src={imageUrl}
+        alt={post.featuredImage?.node?.altText || post.title}
+        class="w-full h-48 object-cover"
+        loading="lazy"
+      />
+    </a>
+  )}
+  <div class="p-6">
+    {category && (
+      <span class="text-xs font-semibold uppercase tracking-wide text-[var(--color-brand-accent)]">
+        {category.name}
+      </span>
+    )}
+    <h3 class="mt-2 text-lg font-bold">
+      <a href={`/blog/${post.slug}`} class="hover:text-[var(--color-brand-primary)] transition-colors">
+        {post.title}
+      </a>
+    </h3>
+    <div class="mt-2 text-sm text-gray-600 line-clamp-3" set:html={post.excerpt} />
+    <div class="mt-4 flex items-center justify-between text-xs text-gray-500">
+      <span>{post.author?.node?.name}</span>
+      <time datetime={post.date}>{formatDate(post.date)}</time>
+    </div>
+  </div>
+</article>

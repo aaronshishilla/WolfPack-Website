@@ -1,0 +1,79 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCaseStudies } from "@/lib/wordpress";
+import type { WPCaseStudy } from "@/types/wordpress";
+
+let caseStudies: WPCaseStudy[] = [];
+
+try {
+  caseStudies = await getCaseStudies();
+} catch {
+  // WordPress unavailable
+}
+---
+
+<BaseLayout
+  title="Case Studies | WolfPack Advising"
+  description="See how we've helped businesses achieve real results."
+>
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-[var(--color-brand-dark)] mb-2">Case Studies</h1>
+      <p class="text-gray-600 mb-12 max-w-2xl">
+        Real results from real partnerships. See how we've helped businesses like yours.
+      </p>
+
+      {caseStudies.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {caseStudies.map((study) => {
+            const fields = study.caseStudyFields;
+            const imageUrl = study.featuredImage?.node?.sourceUrl;
+            return (
+              <article class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt={study.featuredImage?.node?.altText || study.title}
+                    class="w-full h-48 object-cover"
+                    loading="lazy"
+                  />
+                )}
+                <div class="p-8">
+                  {fields?.clientName && (
+                    <span class="text-xs font-semibold uppercase tracking-wide text-[var(--color-brand-accent)]">
+                      {fields.clientName}
+                    </span>
+                  )}
+                  <h3 class="text-xl font-bold mt-2 mb-3">
+                    <a
+                      href={`/case-studies/${study.slug}`}
+                      class="hover:text-[var(--color-brand-primary)] transition-colors"
+                    >
+                      {study.title}
+                    </a>
+                  </h3>
+                  {fields?.challenge && (
+                    <p class="text-gray-600 text-sm line-clamp-3">{fields.challenge}</p>
+                  )}
+                  <a
+                    href={`/case-studies/${study.slug}`}
+                    class="inline-block mt-4 text-sm font-semibold text-[var(--color-brand-accent)] hover:text-[var(--color-brand-primary)] transition-colors"
+                  >
+                    Read Case Study &rarr;
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <div class="text-center py-16 text-gray-500">
+          <p class="text-lg">Case studies coming soon.</p>
+          <p class="text-sm mt-2">
+            Case studies will appear here once the custom post type is configured in WordPress.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

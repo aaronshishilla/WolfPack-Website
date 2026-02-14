@@ -1,0 +1,40 @@
+---
+import type { WPSeo } from "@/types/wordpress";
+
+interface Props {
+  title: string;
+  description?: string;
+  seo?: WPSeo;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const { title, description, seo, ogImage, canonical } = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://wolfpackadvising.com";
+
+const metaTitle = seo?.title || title;
+const metaDescription = seo?.metaDesc || description || "";
+const ogTitle = seo?.opengraphTitle || metaTitle;
+const ogDesc = seo?.opengraphDescription || metaDescription;
+const ogImg = seo?.opengraphImage?.sourceUrl || ogImage || "";
+const canonicalUrl = seo?.canonical || canonical || new URL(Astro.url.pathname, siteUrl).href;
+---
+
+<title>{metaTitle}</title>
+<meta name="description" content={metaDescription} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDesc} />
+<meta property="og:url" content={canonicalUrl} />
+{ogImg && <meta property="og:image" content={ogImg} />}
+<meta property="og:site_name" content="WolfPack Advising" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDesc} />
+{ogImg && <meta name="twitter:image" content={ogImg} />}

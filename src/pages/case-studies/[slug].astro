@@ -1,0 +1,106 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TestimonialCard from "@/components/TestimonialCard.astro";
+import { getCaseStudies, getCaseStudyBySlug } from "@/lib/wordpress";
+
+export async function getStaticPaths() {
+  try {
+    const studies = await getCaseStudies();
+    return studies.map((s) => ({ params: { slug: s.slug } }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+const study = await getCaseStudyBySlug(slug!);
+
+if (!study) {
+  return Astro.redirect("/case-studies");
+}
+
+const fields = study.caseStudyFields;
+const imageUrl = study.featuredImage?.node?.sourceUrl;
+---
+
+<BaseLayout title={study.title} seo={study.seo}>
+  <article class="py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-gray-500 mb-8">
+        <a href="/case-studies" class="hover:text-[var(--color-brand-primary)]">Case Studies</a>
+        <span class="mx-2">/</span>
+        <span>{study.title}</span>
+      </nav>
+
+      {fields?.clientName && (
+        <span class="text-sm font-semibold uppercase tracking-wide text-[var(--color-brand-accent)]">
+          {fields.clientName}
+        </span>
+      )}
+
+      <h1 class="text-4xl lg:text-5xl font-bold text-[var(--color-brand-dark)] mt-2 mb-8">
+        {study.title}
+      </h1>
+
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt={study.featuredImage?.node?.altText || study.title}
+          class="w-full rounded-lg mb-12"
+        />
+      )}
+
+      <!-- Challenge / Solution / Results -->
+      <div class="space-y-12">
+        {fields?.challenge && (
+          <section>
+            <h2 class="text-2xl font-bold text-[var(--color-brand-dark)] mb-4">The Challenge</h2>
+            <div class="text-gray-700 leading-relaxed" set:html={fields.challenge} />
+          </section>
+        )}
+
+        {fields?.solution && (
+          <section>
+            <h2 class="text-2xl font-bold text-[var(--color-brand-dark)] mb-4">Our Solution</h2>
+            <div class="text-gray-700 leading-relaxed" set:html={fields.solution} />
+          </section>
+        )}
+
+        {fields?.results && (
+          <section>
+            <h2 class="text-2xl font-bold text-[var(--color-brand-dark)] mb-4">The Results</h2>
+            <div class="text-gray-700 leading-relaxed" set:html={fields.results} />
+          </section>
+        )}
+      </div>
+
+      <!-- WordPress editor content (additional details) -->
+      {study.content && (
+        <div class="wp-content prose prose-lg max-w-none mt-12" set:html={study.content} />
+      )}
+
+      <!-- Testimonial -->
+      {fields?.testimonialQuote && (
+        <div class="mt-12">
+          <TestimonialCard
+            quote={fields.testimonialQuote}
+            author={fields.testimonialAuthor}
+            role={fields.testimonialRole}
+            clientName={fields.clientName}
+          />
+        </div>
+      )}
+
+      <!-- Back Link -->
+      <div class="mt-8">
+        <a
+          href="/case-studies"
+          class="text-[var(--color-brand-accent)] font-semibold hover:text-[var(--color-brand-primary)] transition-colors"
+        >
+          &larr; Back to Case Studies
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

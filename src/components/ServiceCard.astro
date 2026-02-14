@@ -1,0 +1,32 @@
+---
+import type { WPService } from "@/types/wordpress";
+
+interface Props {
+  service: WPService;
+}
+
+const { service } = Astro.props;
+const fields = service.serviceFields;
+---
+
+<div class="bg-white rounded-lg shadow-sm p-8 hover:shadow-md transition-shadow">
+  {fields?.serviceIcon && (
+    <div class="text-4xl mb-4">{fields.serviceIcon}</div>
+  )}
+  <h3 class="text-xl font-bold text-[var(--color-brand-dark)] mb-3">
+    <a href={`/services/${service.slug}`} class="hover:text-[var(--color-brand-primary)] transition-colors">
+      {service.title}
+    </a>
+  </h3>
+  {fields?.serviceDescription && (
+    <p class="text-gray-600 mb-4">{fields.serviceDescription}</p>
+  )}
+  {fields?.ctaText && (
+    <a
+      href={fields.ctaLink || `/services/${service.slug}`}
+      class="inline-block text-sm font-semibold text-[var(--color-brand-accent)] hover:text-[var(--color-brand-primary)] transition-colors"
+    >
+      {fields.ctaText} &rarr;
+    </a>
+  )}
+</div>

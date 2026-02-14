@@ -1,0 +1,83 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getServices, getServiceBySlug } from "@/lib/wordpress";
+
+export async function getStaticPaths() {
+  try {
+    const services = await getServices();
+    return services.map((s) => ({ params: { slug: s.slug } }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+const service = await getServiceBySlug(slug!);
+
+if (!service) {
+  return Astro.redirect("/services");
+}
+
+const fields = service.serviceFields;
+const imageUrl = service.featuredImage?.node?.sourceUrl;
+---
+
+<BaseLayout title={service.title} seo={service.seo}>
+  <article class="py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-gray-500 mb-8">
+        <a href="/services" class="hover:text-[var(--color-brand-primary)]">Services</a>
+        <span class="mx-2">/</span>
+        <span>{service.title}</span>
+      </nav>
+
+      <h1 class="text-4xl lg:text-5xl font-bold text-[var(--color-brand-dark)] mb-6">
+        {service.title}
+      </h1>
+
+      {fields?.serviceDescription && (
+        <p class="text-xl text-gray-600 mb-8">{fields.serviceDescription}</p>
+      )}
+
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt={service.featuredImage?.node?.altText || service.title}
+          class="w-full rounded-lg mb-8"
+        />
+      )}
+
+      <!-- Content from WordPress editor -->
+      <div class="wp-content prose prose-lg max-w-none" set:html={service.content} />
+
+      <!-- Benefits List -->
+      {fields?.serviceBenefits && fields.serviceBenefits.length > 0 && (
+        <div class="mt-12 bg-white rounded-lg p-8">
+          <h2 class="text-2xl font-bold mb-6">Key Benefits</h2>
+          <ul class="space-y-3">
+            {fields.serviceBenefits.map((benefit) => (
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[var(--color-brand-secondary)] mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- CTA -->
+      <div class="mt-12 text-center bg-[var(--color-brand-primary)] rounded-lg p-8">
+        <h2 class="text-2xl font-bold text-white mb-4">Interested in this service?</h2>
+        <a
+          href={fields?.ctaLink || "/contact"}
+          class="inline-block bg-[var(--color-brand-accent)] text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
+        >
+          {fields?.ctaText || "Get in Touch"}
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

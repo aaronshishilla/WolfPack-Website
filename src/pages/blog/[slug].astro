@@ -1,0 +1,92 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPostBySlug, getAllPostSlugs, formatDate } from "@/lib/wordpress";
+
+export async function getStaticPaths() {
+  try {
+    const slugs = await getAllPostSlugs();
+    return slugs.map((slug) => ({ params: { slug } }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug!);
+
+if (!post) {
+  return Astro.redirect("/blog");
+}
+
+const imageUrl = post.featuredImage?.node?.sourceUrl;
+const category = post.categories?.nodes?.[0];
+---
+
+<BaseLayout title={post.title} seo={post.seo}>
+  <article class="py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-gray-500 mb-8">
+        <a href="/blog" class="hover:text-[var(--color-brand-primary)]">Blog</a>
+        {category && (
+          <>
+            <span class="mx-2">/</span>
+            <span>{category.name}</span>
+          </>
+        )}
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-8">
+        {category && (
+          <span class="text-xs font-semibold uppercase tracking-wide text-[var(--color-brand-accent)]">
+            {category.name}
+          </span>
+        )}
+        <h1 class="text-4xl lg:text-5xl font-bold text-[var(--color-brand-dark)] mt-2 mb-4">
+          {post.title}
+        </h1>
+        <div class="flex items-center text-sm text-gray-500 space-x-4">
+          <span>{post.author?.node?.name}</span>
+          <span>&middot;</span>
+          <time datetime={post.date}>{formatDate(post.date)}</time>
+        </div>
+      </header>
+
+      <!-- Featured Image -->
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt={post.featuredImage?.node?.altText || post.title}
+          class="w-full rounded-lg mb-8"
+        />
+      )}
+
+      <!-- Content -->
+      <div class="wp-content prose prose-lg max-w-none" set:html={post.content} />
+
+      <!-- Tags -->
+      {post.tags?.nodes?.length > 0 && (
+        <div class="mt-12 pt-8 border-t border-gray-200">
+          <div class="flex flex-wrap gap-2">
+            {post.tags.nodes.map((tag) => (
+              <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">
+                {tag.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Back Link -->
+      <div class="mt-8">
+        <a
+          href="/blog"
+          class="text-[var(--color-brand-accent)] font-semibold hover:text-[var(--color-brand-primary)] transition-colors"
+        >
+          &larr; Back to Blog
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

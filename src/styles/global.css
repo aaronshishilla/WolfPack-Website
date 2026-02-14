@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ============================================
+   WolfPack Advising - Design Tokens
+   ============================================ */
+
+@theme {
+  /* Brand Colors - customize these to match WolfPack branding */
+  --color-brand-primary: #1e3a5f;
+  --color-brand-secondary: #2d6a4f;
+  --color-brand-accent: #e07c24;
+  --color-brand-dark: #0d1b2a;
+  --color-brand-light: #f0f4f8;
+
+  /* Typography Scale */
+  --font-family-heading: "Inter", system-ui, sans-serif;
+  --font-family-body: "Inter", system-ui, sans-serif;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-body);
+  color: var(--color-gray-800);
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-brand-dark);
+}
+
+/* WordPress content block styling */
+.wp-content h2 {
+  font-size: 1.875rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.wp-content h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.wp-content p {
+  margin-bottom: 1.25rem;
+}
+
+.wp-content ul,
+.wp-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.wp-content ul {
+  list-style-type: disc;
+}
+
+.wp-content ol {
+  list-style-type: decimal;
+}
+
+.wp-content li {
+  margin-bottom: 0.5rem;
+}
+
+.wp-content a {
+  color: var(--color-brand-primary);
+  text-decoration: underline;
+}
+
+.wp-content a:hover {
+  color: var(--color-brand-accent);
+}
+
+.wp-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.wp-content blockquote {
+  border-left: 4px solid var(--color-brand-accent);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-gray-600);
+}

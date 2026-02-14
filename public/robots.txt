@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block WordPress admin
+Disallow: /wp-admin/
+
+Sitemap: https://wolfpackadvising.com/sitemap-index.xml

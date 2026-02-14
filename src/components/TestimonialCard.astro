@@ -1,0 +1,19 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  role?: string;
+  clientName?: string;
+}
+
+const { quote, author, role, clientName } = Astro.props;
+---
+
+<blockquote class="bg-white rounded-lg shadow-sm p-8 border-l-4 border-[var(--color-brand-accent)]">
+  <p class="text-gray-700 italic text-lg leading-relaxed mb-4">"{quote}"</p>
+  <footer class="text-sm">
+    <span class="font-semibold text-[var(--color-brand-dark)]">{author}</span>
+    {role && <span class="text-gray-500"> &mdash; {role}</span>}
+    {clientName && <span class="text-gray-500">, {clientName}</span>}
+  </footer>
+</blockquote>

@@ -1,0 +1,44 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[var(--color-brand-dark)] text-gray-300 mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Company Info -->
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">WolfPack Advising</h3>
+        <p class="text-sm leading-relaxed">
+          Strategic consulting and advisory services to help your business thrive.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/services" class="hover:text-white transition-colors">Services</a></li>
+          <li><a href="/case-studies" class="hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+          <li><a href="/team" class="hover:text-white transition-colors">Our Team</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Get in Touch</h3>
+        <p class="text-sm">
+          Ready to grow your business?<br />
+          <a href="/contact" class="text-[var(--color-brand-accent)] hover:text-white transition-colors">
+            Let's talk &rarr;
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+      <p>&copy; {currentYear} WolfPack Advising. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
